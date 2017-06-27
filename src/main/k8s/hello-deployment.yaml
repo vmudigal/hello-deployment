@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hello-deployment
+spec:
+  replicas: 2 # tells deployment to run 4 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: hello
+        phase: sandbox
+        role: backend
+    spec:
+      containers:
+      - name: hello
+        image: mudigal-docker-sandbox.bintray.io/com/mudial/hello-deployment:latest
+        ports:
+        - containerPort: 8040

@@ -1,0 +1,9 @@
+spring:
+  application.name: hello
+  velocity.enabled: false
+
+info.component: hello
+
+server:
+  contextPath: /
+  port: 8040
