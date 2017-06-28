@@ -31,10 +31,33 @@
         <div class="readme boxed-group clearfix announce instapaper_body md">
 
             <article class="markdown-body entry-content" itemprop="text">
-                <h1></a>hello-deployment</h1>
-                <p>This hello-deployment project works charm in mac operation system [Tested]</p>
-                <p>What is in it for you?</p>
-                <p>You will get to know about multiple systems such as Continous Integration Server, Deployment Server, Artifacts system etc that are part of build and deployment automation.</p>
+                <h1>What is it??</h1>
+                <p>It is all about automating the entire process of taking the code that you implement from your system to the production</p>
+                <h4>How do you do that??</h4>
+                <h5>Below are the things you need:</h5>  
+                <div>===================================================================</div>  
+                <div>3 branches in git: develop, qa and release</div>
+                <div>3 repositories in bintray: sandbox, staging and release</div>
+                <div>3 jobs in Jenkins: hello-dev, hello-qa and hello-rel</div>
+                <div>3 namespace in kubernetes: develop, test and release</div>  
+                <div>===================================================================</div>
+                    
+                <p>When any of the developer pushes the code to the github (branch: develop), jenkins (hello-dev job) will execute the pipeline defined in the JenkinsFile (available in your source code)</p>    
+                <p>Note: hook missing in this example.</p>  
+                
+                <p>In this example, the pipeline is defined in such a way that the below mentioned steps get triggered</p>  
+                <p>  
+                    <div>1) Pull the code from github's respective branch.</div>     
+                    <div>2) Build the code using dockerized maven tool.</div>   
+                    <div>3) Login to docker registry repository (bintray, in this example)</div>   
+                    <div>4) Create a docker image from the DockerFile available in the target folder.</div>   
+                    <div>5) Tag the local docker image to the image in the docker registry.</div>   
+                    <div>6) Push the image to the docker's respective registry.</div>   
+                    <div>7) Finally deploy the image into kubernetes respective namespace.</div>
+                </p>
+                <p>Note: hello-deployment project works charm in mac operation system with 16 GB RAM [Tested]</p>  
+                <p>Make sure you merge the code from Github develop branch to qa branch and that should execute the pipeline defined in the JenkinsFile available in the qa enviroment. The steps are same to take it to the release environment as well.</p>
+                <h2>Architecture</h2>
                 <p>
                     <a href="https://github.com/vmudigal/hello-deployment/blob/develop/screenshot/BDA.png?raw=true" target="_blank"><img src="https://github.com/vmudigal/hello-deployment/raw/develop/screenshot/BDA.png?raw=true" alt="Alt text" style="max-width:100%;"></a>
                 </p>
@@ -42,6 +65,40 @@
                 <p>Fork <a href="https://www.github.com/vmudigal/hello-deployment.git" target="_blank">https://www.github.com/vmudigal/hello-deployment.git</a> repository and then clone using "git clone -b develop <a href="https://www.github.com/%5BYOUR_GIT_ID%5D/hello-deployment.git">git clone -b develop https://www.github.com/[YOUR_GIT_ID]/hello-deployment.git</a>".</p>
                 <p>Go into "hello-deployment/DevVM/mac" and execute "./bootscript.sh"</p>
                 <p>Done and dusted!!</p>
+            
+          <h3>Technology stack</h3>
+          <ul>
+            <li><a href="https://www.vagrantup.com/">Vagrant</a> -
+              tool for building and managing virtual machine environments in a single workflow.
+            </li>
+            <li><a href="https://www.virtualbox.org/">Virtualbox</a> - virtualization product for enterprise
+            </li>
+            <li><a href="https://www.docker.com">Docker</a> -
+              Containerization platform
+            </li>
+            <li><a href="https://jenkins.io/">Jenkins</a>
+              - open source automation server.
+            </li>
+            <li><a href="https://kubernetes.io/">Kubernetes</a>
+              - an open-source system for automating deployment, scaling, and management of containerized applications.
+            </li>
+            <li><a href="https://grafana.com/">Grafana</a>
+              - Data visualization & Monitoring
+            </li>
+            <li><a href="https://www.influxdata.com/">InfluxDB</a> - Open Source Time Series DB Platform for metrics and events (time series data). 
+            </li>
+            <li><a href="https://github.com/">Github</a>
+              - a web-based Git or version control repository
+            </li>
+            <li><a href="https://projects.spring.io/spring-boot/">Springboot</a>
+              - Application framework
+            </li>
+            <li><a href="https://maven.apache.org/">Maven</a> - build tool
+            </li>
+            <li><a href="https://www.java.com/">Java</a> - programming language
+            </li>
+          </ul>
+
                 <h3>Bintray Account</h3>
                 <p>The docker images that are built during the automated build in Jenkins are stored in bintray as an artifacts.</p>
                 <ol>
